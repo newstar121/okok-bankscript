@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -32,7 +32,29 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+} */
+
+.border {
+  border-right: 1px solid rgba(62, 63, 75);
+  width: 177px;
+}
+
+.w-82 {
+  width: 82%;
+}
+
+.ml {
+  margin-left: 15px;
+}
+
+.fs-14 {
+  font-size: 14px;
+}
+
+.fw-500 {
+  font-weight: 500;
 }
