@@ -1,12 +1,11 @@
 var table = []
 var selectedWindow = "none"
-var data_graph = {}
 var isLoggingOut = false
 
 window.addEventListener('message', function(event) {
 	switch (event.data.action) {
 		case 'loading_data':
-			if (selectedWindow == "none") {
+			if (selectedWindow === "none") {
 
 				$('#menu').html(`
 					<div class="d-flex justify-content-center flex-column align-items-center">
@@ -21,7 +20,7 @@ window.addEventListener('message', function(event) {
 			}
 			break
 		case 'bankmenu':
-			if (selectedWindow == "loading_data") {
+			if (selectedWindow === "loading_data") {
 				$("#menu").fadeOut();
 
 				setTimeout(function(){
@@ -29,7 +28,7 @@ window.addEventListener('message', function(event) {
 					popup_sound.volume = 0.2;
 					popup_sound.play();
 
-					if (event.data.playerSex == "0") {
+					if (event.data.playerSex === "0") {
 						avatar = `<img src="avatar_male.png" class="avatar">`;
 					} else {
 						avatar = `<img src="avatar_female.png" class="avatar">`;
@@ -110,7 +109,7 @@ window.addEventListener('message', function(event) {
 				var db = event.data.db[i];
 
 				// Received
-				if (db.type == 'transfer' && db.receiver_identifier == event.data.identifier) {
+				if (db.type === 'transfer' && db.receiver_identifier === event.data.identifier) {
 					icon = '<td class="align-middle"><span style="background-color: #1d1e24; padding: 10px 15px 10px 15px; border-radius: 10px;"><i class="bi bi-download"></i></span></td>';
 					data = `<td class="align-middle" style="font-weight: 500;">
 								From <span style="color: #1f5eff; font-weight: 600;">${db.sender_name}</span>
@@ -118,7 +117,7 @@ window.addEventListener('message', function(event) {
 							</td>`;
 					amount = `<td class="align-middle" style="font-weight: 500;"><span style="color: #2ecc71; float: right;">+ ${db.value.toLocaleString()} EUR</span> </td>`;
 				// Sent
-				} else if (db.type == 'transfer' && db.sender_identifier == event.data.identifier) {
+				} else if (db.type === 'transfer' && db.sender_identifier === event.data.identifier) {
 					icon = '<td class="align-middle"><span style="background-color: #1d1e24; padding: 10px 15px 10px 15px; border-radius: 10px;"><i class="bi bi-upload"></i></span></td>';
 					data = `<td class="align-middle" style="font-weight: 500;">
 								To <span style="color: #1f5eff; font-weight: 600;">${db.receiver_name}</span>
@@ -126,7 +125,7 @@ window.addEventListener('message', function(event) {
 							</td>`;
 					amount = `<td class="align-middle" style="font-weight: 500;"><span style="float: right;"> - ${db.value.toLocaleString()} EUR</span> </td>`;
 				// Deposited
-				} else if (db.type == 'deposit') {
+				} else if (db.type === 'deposit') {
 					icon = '<td class="align-middle"><span style="background-color: #1d1e24; padding: 10px 15px 10px 15px; border-radius: 10px;"><i class="bi bi-download"></i></span></td>';
 					data = `<td class="align-middle" style="font-weight: 500;">
 								Into <span style="color: #1f5eff; font-weight: 600;">${db.receiver_name}</span>
@@ -134,7 +133,7 @@ window.addEventListener('message', function(event) {
 							</td>`;
 					amount = `<td class="align-middle" style="font-weight: 500;"><span style="color: #2ecc71; float: right;">+ ${db.value.toLocaleString()} EUR</span> </td>`;
 				// Withdrawn
-				} else if (db.type == 'withdraw') {
+				} else if (db.type === 'withdraw') {
 					icon = '<td class="align-middle"><span style="background-color: #1d1e24; padding: 10px 15px 10px 15px; border-radius: 10px;"><i class="bi bi-upload"></i></span></td>';
 					data = `<td class="align-middle" style="font-weight: 500;">
 								From <span style="color: #1f5eff; font-weight: 600;">${db.sender_name}</span>
@@ -256,7 +255,7 @@ window.addEventListener('message', function(event) {
 				var db = event.data.db[i];
 
 				// Received
-				if (db.type == 'transfer' && db.receiver_identifier == event.data.identifier) {
+				if (db.type === 'transfer' && db.receiver_identifier === event.data.identifier) {
 					icon = '<td class="align-middle"><span style="background-color: #1d1e24; padding: 10px 15px 10px 15px; border-radius: 10px;"><i class="bi bi-download"></i></span></td>';
 					data = `<td class="align-middle" style="font-weight: 500;">
 								From <span style="color: #1f5eff; font-weight: 600;">${db.sender_name}</span>
@@ -264,7 +263,7 @@ window.addEventListener('message', function(event) {
 							</td>`;
 					amount = `<td class="align-middle" style="font-weight: 500;"><span style="color: #2ecc71; float: right;">+ ${db.value.toLocaleString()} EUR</span> </td>`;
 				// Sent
-				} else if (db.type == 'transfer' && db.sender_identifier == event.data.identifier) {
+				} else if (db.type === 'transfer' && db.sender_identifier === event.data.identifier) {
 					icon = '<td class="align-middle"><span style="background-color: #1d1e24; padding: 10px 15px 10px 15px; border-radius: 10px;"><i class="bi bi-upload"></i></span></td>';
 					data = `<td class="align-middle" style="font-weight: 500;">
 								To <span style="color: #1f5eff; font-weight: 600;">${db.receiver_name}</span>
@@ -272,7 +271,7 @@ window.addEventListener('message', function(event) {
 							</td>`;
 					amount = `<td class="align-middle" style="font-weight: 500;"><span style="float: right;"> - ${db.value.toLocaleString()} EUR</span> </td>`;
 				// Deposited
-				} else if (db.type == 'deposit') {
+				} else if (db.type === 'deposit') {
 					icon = '<td class="align-middle"><span style="background-color: #1d1e24; padding: 10px 15px 10px 15px; border-radius: 10px;"><i class="bi bi-download"></i></span></td>';
 					data = `<td class="align-middle" style="font-weight: 500;">
 								Into <span style="color: #1f5eff; font-weight: 600;">${db.receiver_name}</span>
@@ -280,7 +279,7 @@ window.addEventListener('message', function(event) {
 							</td>`;
 					amount = `<td class="align-middle" style="font-weight: 500;"><span style="color: #2ecc71; float: right;">+ ${db.value.toLocaleString()} EUR</span> </td>`;
 				// Withdrawn
-				} else if (db.type == 'withdraw') {
+				} else if (db.type === 'withdraw') {
 					icon = '<td class="align-middle"><span style="background-color: #1d1e24; padding: 10px 15px 10px 15px; border-radius: 10px;"><i class="bi bi-upload"></i></span></td>';
 					data = `<td class="align-middle" style="font-weight: 500;">
 								From <span style="color: #1f5eff; font-weight: 600;">${db.sender_name}</span>
@@ -387,6 +386,7 @@ window.addEventListener('message', function(event) {
 
 			selectedWindow = "atm";
 			break
+		default: break;	
 	}
 });
 
@@ -469,7 +469,7 @@ $(document).on('click', ".logout", function() {
 // Close ESC Key
 $(document).ready(function() {
 	document.onkeyup = function(data) {
-		if (data.which == 27) {
+		if (data.which === 27) {
 			switch (selectedWindow) {
 				case 'bankmenu':
 					if(!isLoggingOut) {
@@ -781,7 +781,7 @@ function overview_page_function(event) {
 		var db = event.data.db[i];
 
 		// Received
-		if (db.type == 'transfer' && db.receiver_identifier == event.data.identifier) {
+		if (db.type === 'transfer' && db.receiver_identifier === event.data.identifier) {
 			icon = '<td class="align-middle"><span style="background-color: #1d1e24; padding: 5px 10px 5px 10px; border-radius: 10px;"><i class="bi bi-download"></i></span></td>';
 			data = `<td class="align-middle" style="font-weight: 500; font-size: 16px;">
 						From <span style="color: #1f5eff; font-weight: 600;">${db.sender_name}</span>
@@ -789,7 +789,7 @@ function overview_page_function(event) {
 					</td>`;
 			amount = `<td class="align-middle" style="font-weight: 500;"><span style="color: #2ecc71; float: right;">+ ${db.value.toLocaleString()} EUR</span> </td>`;
 		// Sent
-		} else if (db.type == 'transfer' && db.sender_identifier == event.data.identifier) {
+		} else if (db.type === 'transfer' && db.sender_identifier === event.data.identifier) {
 			icon = '<td class="align-middle"><span style="background-color: #1d1e24; padding: 5px 10px 5px 10px; border-radius: 10px;"><i class="bi bi-upload"></i></span></td>';
 			data = `<td class="align-middle" style="font-weight: 500; font-size: 16px;">
 						To <span style="color: #1f5eff; font-weight: 600;">${db.receiver_name}</span>
@@ -797,7 +797,7 @@ function overview_page_function(event) {
 					</td>`;
 			amount = `<td class="align-middle" style="font-weight: 500;"><span style="float: right;"> - ${db.value.toLocaleString()} EUR</span> </td>`;
 		// Deposited
-		} else if (db.type == 'deposit') {
+		} else if (db.type === 'deposit') {
 			icon = '<td class="align-middle"><span style="background-color: #1d1e24; padding: 5px 10px 5px 10px; border-radius: 10px;"><i class="bi bi-download"></i></span></td>';
 			data = `<td class="align-middle" style="font-weight: 500; font-size: 16px;">
 						Into <span style="color: #1f5eff; font-weight: 600;">${db.receiver_name}</span>
@@ -805,7 +805,7 @@ function overview_page_function(event) {
 					</td>`;
 			amount = `<td class="align-middle" style="font-weight: 500;"><span style="color: #2ecc71; float: right;">+ ${db.value.toLocaleString()} EUR</span> </td>`;
 		// Withdrawn
-		} else if (db.type == 'withdraw') {
+		} else if (db.type === 'withdraw') {
 			icon = '<td class="align-middle"><span style="background-color: #1d1e24; padding: 5px 10px 5px 10px; border-radius: 10px;"><i class="bi bi-upload"></i></span></td>';
 			data = `<td class="align-middle" style="font-weight: 500; font-size: 16px;">
 						From <span style="color: #1f5eff; font-weight: 600;">${db.sender_name}</span>
@@ -1062,7 +1062,7 @@ function society_page_function(event) {
 		var db = event.data.db[i];
 
 		// Received
-		if (db.type == 'transfer' && db.receiver_identifier == event.data.societyInfo.society) {
+		if (db.type === 'transfer' && db.receiver_identifier === event.data.societyInfo.society) {
 			icon = '<td class="align-middle"><span style="background-color: #1d1e24; padding: 5px 10px 5px 10px; border-radius: 10px;"><i class="bi bi-download"></i></span></td>';
 			data = `<td class="align-middle" style="font-weight: 500; font-size: 16px;">
 						From <span style="color: #1f5eff; font-weight: 600;">${db.sender_name}</span>
@@ -1070,7 +1070,7 @@ function society_page_function(event) {
 					</td>`;
 			amount = `<td class="align-middle" style="font-weight: 500;"><span style="color: #2ecc71; float: right;">+ ${db.value.toLocaleString()} EUR</span> </td>`;
 		// Sent
-		} else if (db.type == 'transfer' && db.sender_identifier == event.data.societyInfo.society) {
+		} else if (db.type === 'transfer' && db.sender_identifier === event.data.societyInfo.society) {
 			icon = '<td class="align-middle"><span style="background-color: #1d1e24; padding: 5px 10px 5px 10px; border-radius: 10px;"><i class="bi bi-upload"></i></span></td>';
 			data = `<td class="align-middle" style="font-weight: 500; font-size: 16px;">
 						To <span style="color: #1f5eff; font-weight: 600;">${db.receiver_name}</span>
@@ -1078,7 +1078,7 @@ function society_page_function(event) {
 					</td>`;
 			amount = `<td class="align-middle" style="font-weight: 500;"><span style="float: right;"> - ${db.value.toLocaleString()} EUR</span> </td>`;
 		// Deposited
-		} else if (db.type == 'deposit') {
+		} else if (db.type === 'deposit') {
 			icon = '<td class="align-middle"><span style="background-color: #1d1e24; padding: 5px 10px 5px 10px; border-radius: 10px;"><i class="bi bi-download"></i></span></td>';
 			data = `<td class="align-middle" style="font-weight: 500; font-size: 16px;">
 						Into <span style="color: #1f5eff; font-weight: 600;">${db.receiver_name}</span>
@@ -1086,7 +1086,7 @@ function society_page_function(event) {
 					</td>`;
 			amount = `<td class="align-middle" style="font-weight: 500;"><span style="color: #2ecc71; float: right;">+ ${db.value.toLocaleString()} EUR</span> </td>`;
 		// Withdrawn
-		} else if (db.type == 'withdraw') {
+		} else if (db.type === 'withdraw') {
 			icon = '<td class="align-middle"><span style="background-color: #1d1e24; padding: 5px 10px 5px 10px; border-radius: 10px;"><i class="bi bi-upload"></i></span></td>';
 			data = `<td class="align-middle" style="font-weight: 500; font-size: 16px;">
 						From <span style="color: #1f5eff; font-weight: 600;">${db.sender_name}</span>
@@ -1334,13 +1334,13 @@ function atm_numpad(pin) {
 			number.addEventListener("click", numpad);
 		}
 		function numpad() {
-			if (index == 9 || index == 11) {
-				if (index == 9) {
+			if (index === 9 || index === 11) {
+				if (index === 9) {
 					dots.forEach(function (dot, index) {
 							dot.className = "dot clear";
 						});
-				} else if (index == 11) {
-					if (input == correct) {
+				} else if (index === 11) {
+					if (input === correct) {
 						var correct_sound = new Audio('correct.mp3');
 						correct_sound.volume = 0.2;
 						correct_sound.play();
@@ -1389,7 +1389,7 @@ function atm_numpad(pin) {
 				atm_sound.play();
 
 				if (input.length < 4) {
-					if (index == 10) {
+					if (index === 10) {
 					index = -1
 				}
 				number.className = "number grow";
